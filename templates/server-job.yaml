@@ -91,6 +91,10 @@ spec:
           env:
             - name: SQL_PLUGIN
               value: {{ include "temporal.persistence.sql.driver" (list $ $store) }}
+            - name: SQL_TLS
+              value: "true"
+            - name: SQL_TLS_DISABLE_HOST_VERIFICATION
+              value: "true"
             - name: SQL_HOST
               value: {{ include "temporal.persistence.sql.host" (list $ $store) }}
             - name: SQL_PORT
@@ -148,6 +152,10 @@ spec:
             {{- else if eq (include "temporal.persistence.driver" (list $ $store)) "sql" }}
             - name: SQL_PLUGIN
               value: {{ include "temporal.persistence.sql.driver" (list $ $store) }}
+            - name: SQL_TLS
+              value: "true"
+            - name: SQL_TLS_DISABLE_HOST_VERIFICATION
+              value: "true"
             - name: SQL_HOST
               value: {{ include "temporal.persistence.sql.host" (list $ $store) }}
             - name: SQL_PORT
@@ -295,6 +303,10 @@ spec:
             {{- else if eq (include "temporal.persistence.driver" (list $ $store)) "sql" }}
             - name: SQL_PLUGIN
               value: {{ include "temporal.persistence.sql.driver" (list $ $store) }}
+            - name: SQL_TLS
+              value: "true"
+            - name: SQL_TLS_DISABLE_HOST_VERIFICATION
+              value: "true"
             - name: SQL_HOST
               value: {{ include "temporal.persistence.sql.host" (list $ $store) }}
             - name: SQL_PORT
