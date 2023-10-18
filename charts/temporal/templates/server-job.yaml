@@ -96,9 +96,9 @@ spec:
             - name: SQL_TLS_DISABLE_HOST_VERIFICATION
               value: "true"
             - name: SQL_HOST
-              value: {{ include "temporal.persistence.sql.host" (list $ $store) }}
+              value: {{ include "temporal.persistence.sql.defaultHost" (list $ $store) }}
             - name: SQL_PORT
-              value: {{ include "temporal.persistence.sql.port" (list $ $store) | quote }}
+              value: {{ include "temporal.persistence.sql.defaultPort" (list $ $store) | quote }}
             {{- if $storeConfig.sql.user }}
             - name: SQL_USER
               value: {{ $storeConfig.sql.user }}
