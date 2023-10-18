@@ -87,7 +87,7 @@ spec:
         - name: create-{{ $store }}-store
           image: "{{ $.Values.admintools.image.repository }}:{{ $.Values.admintools.image.tag }}"
           imagePullPolicy: {{ $.Values.admintools.image.pullPolicy }}
-          command: ['temporal-sql-tool', '--database', '{{ include "temporal.persistence.sql.database" (list $ $store) }}', 'create-database']
+          command: ['temporal-sql-tool', '--database', '{{ include "temporal.persistence.sql.database" (list $ $store) }}', 'create-database', '--defaultdb', 'defaultdb']
           env:
             - name: SQL_PLUGIN
               value: {{ include "temporal.persistence.sql.driver" (list $ $store) }}
@@ -96,9 +96,9 @@ spec:
             - name: SQL_TLS_DISABLE_HOST_VERIFICATION
               value: "true"
             - name: SQL_HOST
-              value: {{ include "temporal.persistence.sql.defaultHost" (list $ $store) }}
+              value: {{ include "temporal.persistence.sql.host" (list $ $store) }}
             - name: SQL_PORT
-              value: {{ include "temporal.persistence.sql.defaultPort" (list $ $store) | quote }}
+              value: "25060"
             {{- if $storeConfig.sql.user }}
             - name: SQL_USER
               value: {{ $storeConfig.sql.user }}
